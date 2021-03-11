@@ -1,0 +1,4 @@
+# Name:Platform:Status
+lxc1:ubuntu:start
+lxc2:ubuntu:stop
+lxc3:ubuntu:start
