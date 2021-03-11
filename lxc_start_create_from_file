@@ -1,0 +1,25 @@
+#!/bin/bash -x
+# Automatischer start 
+IFS=:
+while read name platform status 
+do
+
+# Prüfung ob die Maschine existiert 
+if sudo lxc-info --name ${name}
+then
+	echo Maschine existiert 
+else 
+	echo Maschine existiert nicht wird erstellt 
+	sudo lxc-create --name ${name} --template ${platform}
+fi
+
+# Wenn der Status start ist wird die Maschine gestartet 
+if [ "$status" = "start" ]
+then
+	sudo lxc-start --name ${name} && echo Maschina gestartet
+else
+	 echo Bleibt aus!!!  
+fi
+done <$1
+sleep 7
+sudo lxc-ls --fancy 
